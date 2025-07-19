@@ -1,0 +1,42 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> rightSideView(TreeNode* root) {
+        if(root==nullptr){
+            return {};
+        }
+        vector<int> result;
+
+       
+        queue<TreeNode*> q;
+        q.push(root);
+        while(!q.empty()){
+            int listsize = q.size();
+            int value;
+            for(int i=0;i<listsize;i++){
+                TreeNode* uppdatednode = q.front();
+                value = uppdatednode->val;
+                q.pop();
+                if(uppdatednode->left!=nullptr){
+                    q.push(uppdatednode->left);
+                }
+                if(uppdatednode->right!=nullptr){
+                    q.push(uppdatednode->right);
+                }
+            }
+            result.push_back(value);
+        }
+        return result;
+        
+    }
+};
